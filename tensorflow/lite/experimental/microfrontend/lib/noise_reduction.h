@@ -25,6 +25,7 @@ extern "C" {
 #endif
 
 struct NoiseReductionState {
+  int enable_noise_reduction;
   int smoothing_bits;
   uint16_t even_smoothing;
   uint16_t odd_smoothing;

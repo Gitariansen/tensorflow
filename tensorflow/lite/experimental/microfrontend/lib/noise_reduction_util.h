@@ -22,6 +22,8 @@ extern "C" {
 #endif
 
 struct NoiseReductionConfig {
+  // set to false (0) to disable this module
+  int enable_noise_reduction;
   // scale the signal up by 2^(smoothing_bits) before reduction
   int smoothing_bits;
   // smoothing coefficient for even-numbered channels

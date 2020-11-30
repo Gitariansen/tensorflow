@@ -17,6 +17,7 @@ limitations under the License.
 #include <stdio.h>
 
 void NoiseReductionFillConfigWithDefaults(struct NoiseReductionConfig* config) {
+  config->enable_noise_reduction = 1;
   config->smoothing_bits = 10;
   config->even_smoothing = 0.025;
   config->odd_smoothing = 0.06;
@@ -26,6 +27,10 @@ void NoiseReductionFillConfigWithDefaults(struct NoiseReductionConfig* config) {
 int NoiseReductionPopulateState(const struct NoiseReductionConfig* config,
                                 struct NoiseReductionState* state,
                                 int num_channels) {
+  state->enable_noise_reduction = config->enable_noise_reduction;    
+  if (!state->enable_noise_reduction) {
+    return 1;
+  }
   state->smoothing_bits = config->smoothing_bits;
   state->odd_smoothing = config->odd_smoothing * (1 << kNoiseReductionBits);
   state->even_smoothing = config->even_smoothing * (1 << kNoiseReductionBits);
